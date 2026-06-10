@@ -65,11 +65,7 @@ function Index() {
   const addMember = () => {
     const name = newName.trim();
     if (!name) return;
-    if (state.members.length >= 4) {
-      toast.error("Maximal 4 Familienmitglieder");
-      return;
-    }
-    const color = COLORS[state.members.length];
+    const color = COLORS[state.members.length % COLORS.length];
     setState((s) => ({
       ...s,
       members: [...s.members, { id: crypto.randomUUID(), name, color, strikes: [] }],
