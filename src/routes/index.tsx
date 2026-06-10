@@ -25,7 +25,7 @@ type State = { members: Member[]; words: string[] };
 
 const STORAGE_KEY = "boese-woerter-v1";
 const DEFAULT_WORDS = ["Scheiße", "Arsch", "Idiot", "Verdammt"];
-const COLORS = ["#ef4444", "#3b82f6", "#10b981", "#f59e0b"];
+const COLORS = ["#ef4444", "#3b82f6", "#10b981", "#f59e0b", "#8b5cf6", "#ec4899", "#06b6d4", "#f97316"];
 const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
 const LIMIT = 10;
 
@@ -65,11 +65,7 @@ function Index() {
   const addMember = () => {
     const name = newName.trim();
     if (!name) return;
-    if (state.members.length >= 4) {
-      toast.error("Maximal 4 Familienmitglieder");
-      return;
-    }
-    const color = COLORS[state.members.length];
+    const color = COLORS[state.members.length % COLORS.length];
     setState((s) => ({
       ...s,
       members: [...s.members, { id: crypto.randomUUID(), name, color, strikes: [] }],
@@ -269,10 +265,9 @@ function Index() {
           <DialogTrigger asChild>
             <Button
               className="flex-1 bg-white text-slate-900 hover:bg-slate-200 font-semibold"
-              disabled={state.members.length >= 4}
             >
               <UserPlus className="h-4 w-4 mr-2" />
-              Hinzufügen ({state.members.length}/4)
+              Hinzufügen ({state.members.length})
             </Button>
           </DialogTrigger>
           <DialogContent className="bg-slate-900 border-slate-700 text-white">
