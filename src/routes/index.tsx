@@ -232,11 +232,22 @@ function Index() {
                   <Button
                     variant="outline"
                     size="icon"
+                    title="Letzten Strich entfernen"
                     className="border-slate-600 bg-slate-700/50 hover:bg-slate-700 text-white"
                     onClick={() => removeLastStrike(m.id)}
                     disabled={m.strikes.length === 0}
                   >
                     <Minus className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    title="Verlauf"
+                    className="border-slate-600 bg-slate-700/50 hover:bg-slate-700 text-white"
+                    onClick={() => setHistoryMember(m)}
+                    disabled={m.strikes.length === 0}
+                  >
+                    <List className="h-4 w-4" />
                   </Button>
                 </div>
 
