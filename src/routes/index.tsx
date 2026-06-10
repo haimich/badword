@@ -51,6 +51,7 @@ function Index() {
   const [addOpen, setAddOpen] = useState(false);
   const [wordsOpen, setWordsOpen] = useState(false);
   const [strikeMember, setStrikeMember] = useState<Member | null>(null);
+  const [historyMember, setHistoryMember] = useState<Member | null>(null);
 
   useEffect(() => {
     setState(load());
