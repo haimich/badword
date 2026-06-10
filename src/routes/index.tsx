@@ -25,7 +25,7 @@ type State = { members: Member[]; words: string[] };
 
 const STORAGE_KEY = "boese-woerter-v1";
 const DEFAULT_WORDS = ["Scheiße", "Arsch", "Idiot", "Verdammt"];
-const COLORS = ["#ef4444", "#3b82f6", "#10b981", "#f59e0b"];
+const COLORS = ["#ef4444", "#3b82f6", "#10b981", "#f59e0b", "#8b5cf6", "#ec4899", "#06b6d4", "#f97316"];
 const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
 const LIMIT = 10;
 
