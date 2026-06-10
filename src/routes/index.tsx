@@ -123,6 +123,32 @@ function Index() {
     }));
   };
 
+  const removeStrike = (memberId: string, strikeId: string) => {
+    setState((s) => ({
+      ...s,
+      members: s.members.map((m) =>
+        m.id === memberId ? { ...m, strikes: m.strikes.filter((x) => x.id !== strikeId) } : m,
+      ),
+    }));
+    setHistoryMember((hm) =>
+      hm && hm.id === memberId
+        ? { ...hm, strikes: hm.strikes.filter((x) => x.id !== strikeId) }
+        : hm,
+    );
+  };
+
+  const clearWeek = (memberId: string) => {
+    const cutoff = Date.now() - WEEK_MS;
+    setState((s) => ({
+      ...s,
+      members: s.members.map((m) =>
+        m.id === memberId ? { ...m, strikes: m.strikes.filter((x) => x.timestamp < cutoff) } : m,
+      ),
+    }));
+    setHistoryMember(null);
+    toast.success("Striche dieser Woche gelöscht");
+  };
+
   const addWord = () => {
     const w = newWord.trim();
     if (!w) return;
