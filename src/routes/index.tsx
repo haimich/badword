@@ -265,10 +265,9 @@ function Index() {
           <DialogTrigger asChild>
             <Button
               className="flex-1 bg-white text-slate-900 hover:bg-slate-200 font-semibold"
-              disabled={state.members.length >= 4}
             >
               <UserPlus className="h-4 w-4 mr-2" />
-              Hinzufügen ({state.members.length}/4)
+              Hinzufügen ({state.members.length})
             </Button>
           </DialogTrigger>
           <DialogContent className="bg-slate-900 border-slate-700 text-white">
