@@ -12,7 +12,7 @@ import {
   DialogTrigger,
   DialogFooter,
 } from "@/components/ui/dialog";
-import { Plus, Minus, Trash2, UserPlus, Ban, AlertTriangle } from "lucide-react";
+import { Plus, Minus, Trash2, UserPlus, Ban, AlertTriangle, List } from "lucide-react";
 import { toast, Toaster } from "sonner";
 
 export const Route = createFileRoute("/")({
