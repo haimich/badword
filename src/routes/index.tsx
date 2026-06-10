@@ -359,6 +359,68 @@ function Index() {
           </div>
         </DialogContent>
       </Dialog>
+
+      {/* Strike history dialog */}
+      <Dialog open={!!historyMember} onOpenChange={(o) => !o && setHistoryMember(null)}>
+        <DialogContent className="bg-slate-900 border-slate-700 text-white">
+          <DialogHeader>
+            <DialogTitle>Verlauf — {historyMember?.name}</DialogTitle>
+          </DialogHeader>
+          {(() => {
+            const live = state.members.find((x) => x.id === historyMember?.id);
+            const strikes = [...(live?.strikes ?? [])].sort((a, b) => b.timestamp - a.timestamp);
+            const cutoff = Date.now() - WEEK_MS;
+            if (strikes.length === 0) {
+              return <p className="text-slate-400 text-sm">Keine Striche.</p>;
+            }
+            return (
+              <>
+                <div className="max-h-80 overflow-y-auto divide-y divide-slate-800 -mx-2">
+                  {strikes.map((s) => {
+                    const thisWeek = s.timestamp >= cutoff;
+                    return (
+                      <div
+                        key={s.id}
+                        className="flex items-center justify-between gap-2 px-2 py-2"
+                      >
+                        <div className="min-w-0">
+                          <div className="font-medium truncate">{s.word}</div>
+                          <div className="text-xs text-slate-400">
+                            {new Date(s.timestamp).toLocaleString("de-DE", {
+                              dateStyle: "short",
+                              timeStyle: "short",
+                            })}
+                            {thisWeek && (
+                              <span className="ml-2 text-amber-400">diese Woche</span>
+                            )}
+                          </div>
+                        </div>
+                        <Button
+                          size="icon"
+                          variant="ghost"
+                          className="h-8 w-8 text-slate-400 hover:text-red-400 shrink-0"
+                          onClick={() => live && removeStrike(live.id, s.id)}
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    );
+                  })}
+                </div>
+                <DialogFooter>
+                  <Button
+                    variant="outline"
+                    className="border-slate-600 bg-slate-800 text-white hover:bg-slate-700"
+                    onClick={() => live && clearWeek(live.id)}
+                  >
+                    Diese Woche löschen
+                  </Button>
+                </DialogFooter>
+              </>
+            );
+          })()}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
